@@ -32,7 +32,7 @@
     --white:#fff;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth;overflow-anchor:none}
+  html{scroll-behavior:smooth;overflow-anchor:none;overflow-x:hidden}
   body{
     font-family:"Shippori Mincho","Yu Mincho","Hiragino Mincho ProN",serif;
     font-weight:600;color:var(--text);background:var(--white);
@@ -44,7 +44,7 @@
   a{color:inherit}
   img.px{image-rendering:pixelated;image-rendering:crisp-edges;display:block}
   .wrap{max-width:720px;margin:0 auto;padding:0 24px;position:relative;z-index:2}
-  section{position:relative;padding:96px 0 104px}
+  section{position:relative;padding:96px 0 104px;overflow-x:clip}
   p+p{margin-top:1.4em}
   strong{font-weight:800}
   .center{text-align:center}
@@ -267,7 +267,7 @@
   .letter{background:
       radial-gradient(circle at 20% 10%,rgba(255,216,74,.35),transparent 40%),
       radial-gradient(circle at 85% 90%,rgba(242,141,171,.35),transparent 45%),var(--pink-xl)}
-  .letter .final-wrap{position:relative;margin:70px auto 0;width:min(92vw,420px);aspect-ratio:1}
+  .letter .final-wrap{position:relative;margin:70px auto 0;width:min(100%,420px);aspect-ratio:1}
   .orbit{position:absolute;inset:0;animation:spin 36s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
   .orbit .o{position:absolute;left:50%;top:50%;width:0;height:0}
@@ -459,7 +459,7 @@
 <section class="why bg-pinkl" data-wave>
   <div class="wrap">
     <span class="label reveal">The Reason</span>
-    <h2 class="reveal">売れてないのは商品のせいって<br>勘違いしてたんだよね（笑）</h2>
+    <h2 class="reveal">売れてないのは<br>商品のせいって<br>勘違いしてたんだよね（笑）</h2>
     <svg class="flourish reveal" viewBox="0 0 180 24"><path d="M4,14 C40,2 60,24 90,12 C120,0 140,24 176,10"/><circle cx="90" cy="12" r="3"/></svg>
     <p class="reveal">いい商品、コンセプトが決まれば売れるに違いない、って。</p>
     <p class="reveal">でも見られてたのは、商品より先に「私がどんな人なのか」。</p>
