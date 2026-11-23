@@ -32,13 +32,14 @@
     --white:#fff;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth;overflow-anchor:none}
   body{
     font-family:"Shippori Mincho","Yu Mincho","Hiragino Mincho ProN",serif;
     font-weight:600;color:var(--text);background:var(--white);
     font-size:18px;line-height:2.05;letter-spacing:.05em;
     -webkit-font-smoothing:antialiased;overflow-x:hidden;padding-bottom:88px;
   }
+  @media (max-width:759px){ body{font-size:17.1px;letter-spacing:.02em} }
   @media (min-width:760px){ body{font-size:19px} }
   a{color:inherit}
   img.px{image-rendering:pixelated;image-rendering:crisp-edges;display:block}
@@ -86,14 +87,7 @@
     background:linear-gradient(100deg,#F07CA0,#F6A7BE 50%,#F07CA0);color:#fff;
     font-weight:800;font-size:19px;letter-spacing:.12em;
     box-shadow:0 0 0 3px #fff,0 0 0 4.5px var(--gold),0 14px 30px rgba(201,69,111,.25);
-    animation:pulse 2.4s ease-in-out infinite;
   }
-  .btn::after{
-    content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;
-    background:linear-gradient(100deg,transparent,rgba(255,255,255,.7),transparent);
-    transform:skewX(-20deg);animation:shine 3s ease-in-out infinite;
-  }
-  .btn .heart{display:inline-block;animation:beat 1.2s ease-in-out infinite}
   .btn:hover{filter:brightness(1.05)}
   @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
   @keyframes shine{0%{left:-60%}55%,100%{left:130%}}
@@ -101,7 +95,7 @@
   .cta small{display:block;margin-top:14px;color:var(--muted);font-size:15px}
 
   /* ---------- ふわっと表示 ---------- */
-  .reveal{opacity:0;transform:translateY(34px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+  .reveal{opacity:0;transition:opacity .9s ease}
   .reveal.in{opacity:1;transform:none}
   .reveal.d1{transition-delay:.12s}.reveal.d2{transition-delay:.24s}.reveal.d3{transition-delay:.36s}
 
@@ -191,14 +185,14 @@
   /* ---------- ストーリー（写真背景） ---------- */
   .story{
     padding:130px 0;
-    background:
-      linear-gradient(rgba(255,245,248,.86),rgba(255,245,248,.9)),
-      url("https://s3-ap-northeast-1.amazonaws.com/s3.peraichi.com/userData/62159751-f1c8-44f5-8d73-574a0a0014b5/img/10461ef4-d841-4e6b-b711-19af2656f318/__________2026-09-27_141252.png") center/cover no-repeat,
-      var(--pink-xl);
+    background:var(--pink-xl);
   }
-  @media (min-width:760px){ .story{background-attachment:fixed,fixed,scroll} }
   .story .big{text-align:center;font-size:clamp(25px,6vw,32px);font-weight:800;color:var(--rose);line-height:1.7;margin-bottom:40px}
   .story p{line-height:2.25}
+  .story .photo{display:block;margin:1.6em auto;border-radius:24px;background:#fff;
+    box-shadow:0 0 0 1.5px var(--gold),0 0 0 7px #fff,0 0 0 8px var(--pink),0 14px 30px rgba(201,69,111,.15)}
+  .story .photo.chart{width:100%;max-width:480px}
+  .story .photo.hair{width:62%;max-width:260px}
   .story .em{font-size:clamp(21px,5.2vw,26px);font-weight:800;color:var(--rose);line-height:1.85;text-align:center;margin:1.6em 0}
 
   /* ---------- 変化 ---------- */
@@ -230,6 +224,9 @@
   .card h3{font-size:20px}
   .card p{font-size:16.5px;color:var(--muted);line-height:1.85;margin-top:2px;font-weight:600}
 
+  .book{text-align:center;margin:-16px 0 40px;font-size:18px;line-height:1.9}
+  .book strong{display:inline-block;margin-top:4px;font-size:clamp(20px,5.4vw,25px);color:var(--rose);
+    background:linear-gradient(transparent 62%,var(--yellow) 62%);padding:0 4px}
   /* ---------- おすすめ ---------- */
   .checks{list-style:none;display:grid;gap:12px}
   .checks li{padding:18px 22px 18px 60px;position:relative;background:#fff;border-radius:22px;line-height:1.75;
@@ -266,7 +263,8 @@
   .faq .a::before{content:"A.";position:absolute;left:0;top:8px;font-family:"Cormorant Garamond",serif;font-style:italic;color:var(--pink);font-size:28px}
 
   /* ---------- 最後に ---------- */
-  .letter{overflow:hidden;background:
+  .sprinkle-layer{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+  .letter{background:
       radial-gradient(circle at 20% 10%,rgba(255,216,74,.35),transparent 40%),
       radial-gradient(circle at 85% 90%,rgba(242,141,171,.35),transparent 45%),var(--pink-xl)}
   .letter .final-wrap{position:relative;margin:70px auto 0;width:min(92vw,420px);aspect-ratio:1}
@@ -327,7 +325,6 @@
     background:rgba(255,255,255,.92);backdrop-filter:blur(8px);box-shadow:0 -1px 0 rgba(199,155,69,.5)}
   .sticky a{position:relative;display:block;max-width:520px;margin:0 auto;text-align:center;text-decoration:none;
     background:linear-gradient(100deg,#F07CA0,#F6A7BE 50%,#F07CA0);color:#fff;font-weight:800;font-size:18px;letter-spacing:.12em;padding:14px;border-radius:999px;overflow:hidden}
-  .sticky a::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.7),transparent);transform:skewX(-20deg);animation:shine 3s ease-in-out infinite}
   .sticky img{position:absolute;left:max(16px,calc(50% - 280px));top:-30px;height:44px;width:auto;animation:hop .5s steps(2) infinite;z-index:2}
 
   @media (min-width:760px){
@@ -425,11 +422,13 @@
     <p class="reveal">初めてのオンライン講座は、お金をもらうのが怖くて受講料7,000円。<br>日給にしたら…1,200円（笑）</p>
     <p class="reveal">キラキラした女性起業家を見ては「経験値なら負けてないのに…」って嫉妬してた。</p>
     <p class="reveal">そんな時、数年前に受けた天体色数®をもう一回復習してみたの。<br>スピリットカラーマップを見た瞬間、</p>
+    <img class="photo chart reveal" src="https://s3-ap-northeast-1.amazonaws.com/s3.peraichi.com/userData/62159751-f1c8-44f5-8d73-574a0a0014b5/img/d7c8cf64-a598-4480-a36e-fe069409774e/__________2026-11-24_013052.png" alt="私のスピリットカラーマップ" loading="lazy">
     <p class="em reveal">あ…私の人生、<br>間違ってなかったんだ…！😭</p>
     <p class="reveal">ダメだと思ってたところが、ぜんぶ長所の裏返しだった。</p>
     <p class="reveal">隠れていたいのに、なぜか目立っちゃう。<br>コツコツ積み上げられない。<br>楽しそうなことにすぐ逃げちゃう。</p>
     <p class="em reveal">「もう開き直っちゃえ！！」</p>
     <p class="reveal">正社員の内定を断って、髪を金髪に💛</p>
+    <img class="photo hair reveal" src="https://s3-ap-northeast-1.amazonaws.com/s3.peraichi.com/userData/62159751-f1c8-44f5-8d73-574a0a0014b5/img/f7d0d4b5-2b64-461f-ac27-264bcdd1a7de/__________2026-10-08_160335.png" alt="金髪にした日高愛子" loading="lazy">
   </div>
 </section>
 
@@ -473,16 +472,17 @@
 <section class="contents bg-white" data-wave data-walker="1" data-rev>
   <div class="wrap">
     <span class="label reveal">Contents</span>
-    <h2 class="reveal">メンカラ鑑定でわかること</h2>
+    <h2 class="reveal">メンカラ鑑定書でわかること</h2>
     <svg class="flourish reveal" viewBox="0 0 180 24"><path d="M4,14 C40,2 60,24 90,12 C120,0 140,24 176,10"/><circle cx="90" cy="12" r="3"/></svg>
+    <p class="book reveal">約20ページの<br><strong>【自分専用ブランディングBOOK】</strong></p>
     <div class="grid">
-      <div class="card reveal"><div class="ic"><b>01</b><img class="px" data-c="11" alt=""></div><div><h3>あなたのメンカラ（使命カラー）</h3><p>統合色数から出す、あなたがこの人生に「遊びに来た」使命の色</p></div></div>
-      <div class="card reveal d1"><div class="ic"><b>02</b><img class="px" data-c="2" alt=""></div><div><h3>密かな欲望</h3><p>本当はこうしたい！を、太陽から読み解く</p></div></div>
-      <div class="card reveal"><div class="ic"><b>03</b><img class="px" data-c="5" alt=""></div><div><h3>欲望全開コマンド</h3><p>開き直って光るための、あなた専用の合言葉</p></div></div>
-      <div class="card reveal d1"><div class="ic"><b>04</b><img class="px" data-c="7" alt=""></div><div><h3>これをやると覚醒が遠のく</h3><p>無意識にやっちゃうブレーキのパターン</p></div></div>
-      <div class="card reveal"><div class="ic"><b>05</b><img class="px" data-c="6" alt=""></div><div><h3>魅力タイプ</h3><p>あなたが一番愛されるふるまい方</p></div></div>
-      <div class="card reveal d1"><div class="ic"><b>06</b><img class="px" data-c="9" alt=""></div><div><h3>向いてる魅せ方・サービス</h3><p>あなたが一番ラクに光れる発信と商品の形</p></div></div>
-      <div class="card reveal"><div class="ic"><b>07</b><img class="px" data-c="8" alt=""></div><div><h3>お客さんがあなたに求めているもの</h3><p>あなたのところに来る人が、本当に欲しいもの</p></div></div>
+      <div class="card reveal"><div class="ic"><b>01</b><img class="px" data-c="11" alt=""></div><div><h3>あなたは何キャラ？</h3><p>メンカラ、魅力タイプ、個性の組み合わせ。自分のキャラクターを一言で表現。</p></div></div>
+      <div class="card reveal d1"><div class="ic"><b>02</b><img class="px" data-c="2" alt=""></div><div><h3>あなたが推される理由</h3><p>他人が惹かれるポイント、意外なギャップ、無意識に与えている魅力。</p></div></div>
+      <div class="card reveal"><div class="ic"><b>03</b><img class="px" data-c="5" alt=""></div><div><h3>あなたのファンになるのは誰？</h3><p>惹かれやすい人の願望、共感される理由、選ばれる場面。</p></div></div>
+      <div class="card reveal d1"><div class="ic"><b>04</b><img class="px" data-c="7" alt=""></div><div><h3>魅力の封印・暴走パターン</h3><p>いい子になって隠している魅力、頑張りすぎると裏目に出る魅力、解除のヒント。</p></div></div>
+      <div class="card reveal"><div class="ic"><b>05</b><img class="px" data-c="6" alt=""></div><div><h3>推される私の魅せ方</h3><p>発信のキャラクター、言葉遣い、ビジュアル、プロフィール、SNSで伝えるテーマ。</p></div></div>
+      <div class="card reveal d1"><div class="ic"><b>06</b><img class="px" data-c="9" alt=""></div><div><h3>推される私の取扱説明書</h3><p>あなたが一番ラクに光れる、ふるまいのルール。</p></div></div>
+      <div class="card reveal"><div class="ic"><b>07</b><img class="px" data-c="8" alt=""></div><div><h3>今年の運気、月別リズム</h3><p>今年の流れと、月ごとの動きどき・休みどき。</p></div></div>
     </div>
     <div class="cta reveal">
       <a class="btn" href="https://lin.ee/ybprFkE" target="_blank" rel="noopener"><span class="heart">♡</span>公式LINEで申し込む</a>
@@ -519,8 +519,8 @@
         <h3>メンカラ鑑定書コース</h3>
         <p class="yen">22,000<small>円（税込）</small></p>
         <ul>
-          <li>メンカラ鑑定書（PDF）</li>
-          <li>お申し込みから5日でお届け</li>
+          <li>メンカラ鑑定書（PDF・約20ページ）</li>
+          <li>お申し込みから3日でお届け</li>
         </ul>
       </div>
       <div class="plan rec reveal d1">
@@ -529,7 +529,7 @@
         <h3>メンカラ個別セッションコース</h3>
         <p class="yen">55,000<small>円（税込）</small></p>
         <ul>
-          <li>メンカラ鑑定書（PDF）</li>
+          <li>メンカラ鑑定書（PDF・約20ページ）</li>
           <li>Zoomセッション 90分＋60分（計2回）
             <span class="sub">1回目：鑑定書の読み解き<br>2回目：あなたの商品と発信に落とし込む</span>
           </li>
@@ -691,7 +691,9 @@ function placeOrbit(){
     s.appendChild(im); o.appendChild(s); orbit.appendChild(o);
   }
 }
-placeOrbit(); addEventListener('resize', placeOrbit);
+placeOrbit();
+let lastW = innerWidth;
+addEventListener('resize', () => { if (innerWidth !== lastW) { lastW = innerWidth; placeOrbit(); } });
 
 // セクションの上に波＋金のライン、ところどころキャラが歩く
 document.querySelectorAll('section[data-wave]').forEach(sec => {
@@ -728,7 +730,8 @@ function sprinkle(el, n){
   }
 }
 sprinkle(document.getElementById('hero'), 16);
-sprinkle(document.getElementById('letter'), 10);
+(() => { const L = document.getElementById('letter'); const layer = document.createElement('div');
+  layer.className = 'sprinkle-layer'; L.appendChild(layer); sprinkle(layer, 10); })();
 
 // スクロールでふわっと出す
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold:.15});
@@ -740,7 +743,7 @@ document.querySelectorAll('.hero .arch').forEach(a => {
   const fit = () => { const W = a.clientWidth, H = a.clientHeight, R = Math.min(300, W/2) - 8, b = 32;
     svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
     path.setAttribute('d', `M8,${H-8-b} L8,${R+8} A${R},${R} 0 0 1 ${W-8},${R+8} L${W-8},${H-8-b} Q${W-8},${H-8} ${W-8-b},${H-8} L${8+b},${H-8} Q8,${H-8} 8,${H-8-b} Z`); };
-  fit(); addEventListener('resize', fit);
+  fit(); let w0 = innerWidth; addEventListener('resize', () => { if (innerWidth !== w0) { w0 = innerWidth; fit(); } });
 });
 </script>
 </body>
